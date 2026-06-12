@@ -1,0 +1,11 @@
+data/*.csv
+data/images/*.jpg
+embeddings/*.npy
+embeddings/*.index
+embeddings/*.txt
+models/*.pth
+qdrant_db/
+__pycache__/
+.env
+.ipynb_checkpoints/
+mlruns/
