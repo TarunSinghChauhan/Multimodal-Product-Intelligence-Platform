@@ -72,8 +72,3 @@ graph TD
    streamlit run streamlit/app.py
    ```
 
-## 📝 Resume Impact
-*   **Engineered a multimodal semantic search system** for a 50k product catalog using **CLIP** and **FAISS**, achieving a **p99 retrieval latency of 42ms** and improving search relevance (MRR@10) by 35% over traditional keyword search.
-*   **Fine-tuned a Vision Transformer (ViT)** for product categorization, reaching **89% Top-1 accuracy** on 12 categories and implementing mixed-precision training for 2x faster convergence.
-*   **Architected a RAG discovery pipeline** using **LangChain** and **Claude 3.5**, reducing hallucination in product Q&A to <5% through cross-encoder re-ranking and attribute-grounded filtering.
-*   **Developed an automated attribute extraction engine** processing 50k items via **async LLM pipelines**, achieving 92% F1 score in extracting structured metadata from noisy product descriptions.
