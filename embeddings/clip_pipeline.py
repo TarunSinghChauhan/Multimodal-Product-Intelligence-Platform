@@ -6,6 +6,7 @@ from PIL import Image
 from tqdm import tqdm
 from transformers import CLIPProcessor, CLIPModel
 import torch.nn.functional as F
+from embeddings.utils.fusion import fuse_embeddings
 
 # Configuration
 DATA_DIR = "data"
@@ -81,9 +82,7 @@ def run_clip_pipeline():
 
     # 5. Multimodal Fusion (0.4 image, 0.6 text)
     print("Fusing embeddings...")
-    fusion_embeddings = (0.4 * full_image_embeddings) + (0.6 * text_embeddings)
-    # Normalize
-    fusion_embeddings = fusion_embeddings / np.linalg.norm(fusion_embeddings, axis=1, keepdims=True)
+    fusion_embeddings = fuse_embeddings(full_image_embeddings, text_embeddings, image_weight=0.4, text_weight=0.6)
 
     # Save results
     np.save(os.path.join(EMBEDDING_DIR, "image_embeddings.npy"), full_image_embeddings)
