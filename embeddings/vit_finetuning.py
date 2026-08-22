@@ -170,7 +170,7 @@ def train_vit():
 
             if val_acc > best_val_acc:
                 best_val_acc = val_acc
-                torch.save(model.state_of_dict(), os.path.join(MODELS_DIR, "best_vit_model.pth"))
+                torch.save(model.state_dict(), os.path.join(MODELS_DIR, "best_vit_model.pth"))
                 no_improve = 0
             else:
                 no_improve += 1
