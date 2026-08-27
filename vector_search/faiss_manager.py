@@ -1,6 +1,11 @@
 import os
 import faiss
 import numpy as np
+
+
+def select_index_type(num_vectors: int, threshold: int = 10000) -> str:
+    """Use approximate IVF indexing for large collections, exact FlatIP for small ones."""
+    return "IVF" if num_vectors > threshold else "FlatIP"
 import pandas as pd
 import time
 from tqdm import tqdm
@@ -33,7 +38,7 @@ class VectorSearchSystem:
         for name, matrix in embeddings_dict.items():
             print(f"Building index for {name}...")
             # Use IVF for large indices (fusion, text, image)
-            self.indices[name] = self.build_index(matrix, index_type="IVF" if len(matrix) > 10000 else "FlatIP")
+            self.indices[name] = self.build_index(matrix, index_type=select_index_type(len(matrix)))
 
     def save_indices(self, path):
         os.makedirs(path, exist_ok=True)
