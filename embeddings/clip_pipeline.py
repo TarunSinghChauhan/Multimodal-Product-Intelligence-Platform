@@ -7,6 +7,7 @@ from tqdm import tqdm
 from transformers import CLIPProcessor, CLIPModel
 import torch.nn.functional as F
 from embeddings.utils.fusion import fuse_embeddings
+from embeddings.utils.accuracy import calculate_accuracy
 
 # Configuration
 DATA_DIR = "data"
@@ -105,7 +106,7 @@ def run_clip_pipeline():
     
     # Calculate accuracy
     true_labels = df_products['category'].map({cat: i for i, cat in enumerate(categories)}).values
-    accuracy = (predictions == true_labels).mean()
+    accuracy = calculate_accuracy(predictions, true_labels)
     
     print(f"Zero-shot Classification Accuracy: {accuracy:.4f}")
     
