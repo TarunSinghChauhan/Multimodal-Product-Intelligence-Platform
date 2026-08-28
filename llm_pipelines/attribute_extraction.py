@@ -17,6 +17,11 @@ API_KEY = os.getenv("ANTHROPIC_API_KEY", "your_key_here")
 CONCURRENT_REQUESTS = 50
 RETRY_ATTEMPTS = 3
 
+def calculate_backoff_wait(attempt: int) -> int:
+    """Exponential backoff: 2^attempt + 1 seconds."""
+    return (2 ** attempt) + 1
+
+
 class ProductAttributes(BaseModel):
     product_id: str
     color: Optional[str] = None
@@ -66,7 +71,7 @@ async def extract_attributes_for_product(session, product_id, title, description
                     pbar.update(1)
                     return ProductAttributes(**attr_dict)
                 elif response.status == 429: # Rate limit
-                    wait_time = (2 ** attempt) + 1
+                    wait_time = calculate_backoff_wait(attempt)
                     await asyncio.sleep(wait_time)
                 else:
                     await asyncio.sleep(1)
