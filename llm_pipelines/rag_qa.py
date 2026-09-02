@@ -35,12 +35,6 @@ class ProductRAG:
             collection_name="products"
         )
 
-    def classify_query(self, query: str) -> str:
-        """Determines if query is a search or a question."""
-        prompt = f"Classify this query as 'SEARCH' (user looking for products) or 'QUESTION' (user asking about product details): '{query}'. Reply with only one word."
-        response = self.llm.invoke(prompt).content.strip()
-        return response
-
     def retrieve_and_rerank(self, query: str, k=10) -> List[Dict]:
         # 1. Semantic Retrieval
         docs = self.vector_store.similarity_search(query, k=k)
