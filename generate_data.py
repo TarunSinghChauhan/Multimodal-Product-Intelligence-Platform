@@ -22,7 +22,7 @@ DATA_DIR = "data"
 IMAGE_DIR = os.path.join(DATA_DIR, "images")
 
 CATEGORIES = {
-    "Electronics": ["Smarphones", "Laptops", "Headphones", "Cameras", "Smartwatches"],
+    "Electronics": ["Smartphones", "Laptops", "Headphones", "Cameras", "Smartwatches"],
     "Clothing": ["T-Shirts", "Jeans", "Jackets", "Dresses", "Shoes"],
     "Home & Kitchen": ["Blenders", "Coffee Makers", "Cookware", "Bedding", "Furniture"],
     "Beauty": ["Skincare", "Makeup", "Fragrance", "Haircare", "Nail Polish"],
